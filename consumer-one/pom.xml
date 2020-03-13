@@ -4,12 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.example</groupId>
-        <artifactId>rabbit-mq</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.5.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>provider-one</artifactId>
-    <name>provider-one</name>
+    <groupId>com.example</groupId>
+    <artifactId>consumer-one</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>consumer-one</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
