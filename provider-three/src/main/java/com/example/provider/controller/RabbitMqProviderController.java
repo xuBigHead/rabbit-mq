@@ -13,7 +13,7 @@ import java.util.Map;
  * @since 2020/2/24
  */
 @RestController
-@RequestMapping("/provider-one")
+@RequestMapping("/provider-three")
 @AllArgsConstructor
 public class RabbitMqProviderController {
     RabbitMqProviderService rabbitMqProviderService;

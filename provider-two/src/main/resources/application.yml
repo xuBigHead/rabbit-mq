@@ -1,8 +1,8 @@
 server:
-  port: 8011
+  port: 8012
 spring:
   application:
-    name: rabbit-provider-one
+    name: rabbit-provider-two
   profiles:
     active: dev
   rabbitmq:

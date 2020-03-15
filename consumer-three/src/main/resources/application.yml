@@ -1,8 +1,8 @@
 server:
-  port: 8011
+  port: 8023
 spring:
   application:
-    name: rabbit-provider-one
+    name: rabbit-consumer-three
   profiles:
     active: dev
   rabbitmq:
