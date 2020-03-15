@@ -17,18 +17,22 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class DirectRabbitConfig {
+    public static final String QUEUE = "direct";
+    public static final String EXCHANGE = "direct.exchange";
+    public static final String ROUTING_KEY = "direct.key";
+
     @Bean
     public Queue direct() {
-        return new Queue("direct");
+        return new Queue(QUEUE,true);
     }
 
     @Bean
     public DirectExchange directExchange() {
-        return new DirectExchange("exchange.direct");
+        return new DirectExchange(EXCHANGE, true, false);
     }
 
     @Bean
     public Binding directBindingExchange(Queue direct, DirectExchange directExchange) {
-        return BindingBuilder.bind(direct).to(directExchange).with("direct");
+        return BindingBuilder.bind(direct).to(directExchange).with(ROUTING_KEY);
     }
 }

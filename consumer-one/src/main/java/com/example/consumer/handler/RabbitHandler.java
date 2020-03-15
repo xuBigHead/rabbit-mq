@@ -1,5 +1,6 @@
 package com.example.consumer.handler;
 
+import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -15,8 +16,9 @@ import org.springframework.stereotype.Component;
 public class RabbitHandler {
 
     @RabbitListener(queues = {"direct"})
-    public void processDirect(Message message) {
+    public void processDirect(Message message, Channel channel) {
         log.info("Receiver direct: {}", new String(message.getBody()));
+
     }
 
     @RabbitListener(queues = {"fanout.a", "fanout.b", "fanout.c"})
