@@ -7,8 +7,11 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.xml.namespace.QName;
 
 /**
  * direct exchange使用routing key进行消息传输
@@ -21,18 +24,19 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DirectRabbitConfig {
 
-    @Bean
+    @Bean(QueueNameConst.DIRECT_QUEUE_ONE)
     public Queue direct() {
         return new Queue(QueueNameConst.DIRECT_QUEUE_ONE, true, false, false);
     }
 
-    @Bean
+    @Bean(ExchangeNameConst.DIRECT_EXCHANGE_ONE)
     public DirectExchange directExchange() {
         return new DirectExchange(ExchangeNameConst.DIRECT_EXCHANGE_ONE, true, false);
     }
 
     @Bean
-    public Binding directBindingExchange(Queue direct, DirectExchange directExchange) {
+    public Binding directBindingExchange(@Qualifier(QueueNameConst.DIRECT_QUEUE_ONE) Queue direct,
+                                         @Qualifier(ExchangeNameConst.DIRECT_EXCHANGE_ONE) DirectExchange directExchange) {
         return BindingBuilder.bind(direct).to(directExchange).with(RoutingKeyNameConst.DIRECT_ROUTING_KEY_ONE);
     }
 }

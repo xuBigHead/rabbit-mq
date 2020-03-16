@@ -30,14 +30,14 @@ public class RabbitMqProviderServiceImpl implements RabbitMqProviderService {
     @Override
     public void sendString(String message) {
         log.info("send string message: {}", message);
-        rabbitTemplate.convertAndSend(ExchangeNameConst.DIRECT_EXCHANGE, RoutingKeyNameConst.DIRECT_ROUTING_KEY, message);
+        rabbitTemplate.convertAndSend(ExchangeNameConst.DIRECT_EXCHANGE_ONE, RoutingKeyNameConst.DIRECT_ROUTING_KEY_ONE, message);
     }
 
     @Override
     public void sendObject(RabbitBean bean) {
         String messageStr = JSONObject.toJSONString(bean);
         log.info("send object message {}",messageStr);
-        rabbitTemplate.convertAndSend(ExchangeNameConst.DIRECT_EXCHANGE, RoutingKeyNameConst.DIRECT_ROUTING_KEY, messageStr);
+        rabbitTemplate.convertAndSend(ExchangeNameConst.DIRECT_EXCHANGE_ONE, RoutingKeyNameConst.DIRECT_ROUTING_KEY_ONE, messageStr);
     }
 
     @Override

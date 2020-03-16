@@ -17,22 +17,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class RabbitHandler {
-
-    @RabbitListener(queues = {QueueNameConst.DIRECT_QUEUE})
-    public void processDirect(Message message, Channel channel) {
-        String messageStr = new String(message.getBody());
-        RabbitBean rabbitBean = null;
-        try {
-            rabbitBean = JSON.parseObject(messageStr, RabbitBean.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.err.println(messageStr);
-        System.err.println(rabbitBean);
-        log.info("Receiver direct: {}", messageStr);
-
-    }
-
     @RabbitListener(queues = {"fanout.a", "fanout.b", "fanout.c"})
     public void processFanout(Message message) {
         log.info("Receiver fanout: {}", new String(message.getBody()));

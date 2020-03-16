@@ -36,7 +36,7 @@ public class RabbitMqProviderServiceImpl implements RabbitMqProviderService {
     public void sendObject(RabbitBean bean) {
         String messageStr = JSONObject.toJSONString(bean);
         log.info("send object message {}",messageStr);
-        rabbitTemplate.convertAndSend(ExchangeNameConst.DIRECT_EXCHANGE, RoutingKeyNameConst.DIRECT_ROUTING_KEY, messageStr);
+        rabbitTemplate.convertAndSend(ExchangeNameConst.DIRECT_EXCHANGE_THREE, RoutingKeyNameConst.DIRECT_ROUTING_KEY_THREE, messageStr);
     }
 
     @Override
