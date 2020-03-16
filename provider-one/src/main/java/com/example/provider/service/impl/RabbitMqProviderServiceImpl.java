@@ -1,16 +1,18 @@
 package com.example.provider.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.example.constant.ExchangeNameConst;
 import com.example.constant.RoutingKeyNameConst;
 import com.example.entity.RabbitBean;
-import com.example.provider.config.DirectRabbitConfig;
 import com.example.provider.service.RabbitMqProviderService;
+import com.fasterxml.jackson.databind.ser.impl.ObjectIdWriter;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.amqp.support.converter.SimpleMessageConverter;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,7 @@ public class RabbitMqProviderServiceImpl implements RabbitMqProviderService {
     public void sendObject(RabbitBean bean) {
         String messageStr = JSONObject.toJSONString(bean);
         log.info("send object message {}",messageStr);
+
         rabbitTemplate.convertAndSend(ExchangeNameConst.DIRECT_EXCHANGE_ONE, RoutingKeyNameConst.DIRECT_ROUTING_KEY_ONE, messageStr);
     }
 

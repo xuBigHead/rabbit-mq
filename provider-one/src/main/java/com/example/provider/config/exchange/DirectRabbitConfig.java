@@ -1,4 +1,4 @@
-package com.example.provider.config;
+package com.example.provider.config.exchange;
 
 import com.example.constant.ExchangeNameConst;
 import com.example.constant.QueueNameConst;

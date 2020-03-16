@@ -5,6 +5,11 @@ spring:
     name: rabbit-provider-three
   profiles:
     active: dev
+  datasource:
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:mysql://39.108.87.253:3306/rabbit_mq?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 340823
   rabbitmq:
     host: 39.108.87.253
     port: 5672

@@ -41,6 +41,16 @@
                 <artifactId>fastjson</artifactId>
                 <version>1.2.62</version>
             </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>3.3.1.tmp</version>
+            </dependency>
+            <dependency>
+                <groupId>p6spy</groupId>
+                <artifactId>p6spy</artifactId>
+                <version>3.8.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>

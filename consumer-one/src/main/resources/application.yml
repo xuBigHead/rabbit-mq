@@ -5,6 +5,11 @@ spring:
     name: rabbit-consumer-one
   profiles:
     active: dev
+  datasource:
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:mysql://39.108.87.253:3306/rabbit_mq?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 340823
   rabbitmq:
     host: 39.108.87.253
     port: 5672
@@ -13,12 +18,12 @@ spring:
     virtual-host: /
     requested-heartbeat: 20
     connection-timeout: 0
-    publisher-confirm-type: correlated        # 配置确认回调
-    publisher-returns: true
+    publisher-confirm-type: correlated        # 开启confirms回调P->Exchange
+    publisher-returns: true                   # 开启returnedMessage回调Exchange->Queue
     listener:
       type: simple
       simple:
-        acknowledge-mode: manual              # 手动确认
+        acknowledge-mode: manual              # 手动确认ack
         prefetch: 10                          # 限制每次发送一条数据。
         concurrency: 1                        # 同一个队列启动几个消费者
         max-concurrency: 1                    # 启动消费者最大数量

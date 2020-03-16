@@ -1,9 +1,11 @@
 package com.example.provider.config;
 
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.example.constant.ExchangeNameConst;
 import com.example.constant.RoutingKeyNameConst;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class RabbitConfig {
     public RabbitTemplate rabbitTemplate(){
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         //rabbitTemplate.setMessageConverter(converter());
+
+        String idStr = IdWorker.getIdStr();
+        rabbitTemplate.setCorrelationKey(idStr);
 
         // 消息是否成功发送到Exchange
         rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
