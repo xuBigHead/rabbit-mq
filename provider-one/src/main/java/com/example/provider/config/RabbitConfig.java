@@ -25,7 +25,7 @@ public class RabbitConfig {
     @Bean
     public RabbitTemplate rabbitTemplate(){
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(converter());
+        //rabbitTemplate.setMessageConverter(converter());
 
         // 消息是否成功发送到Exchange
         rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
@@ -46,8 +46,8 @@ public class RabbitConfig {
         return rabbitTemplate;
     }
 
-    @Bean
-    public Jackson2JsonMessageConverter converter() {
-        return new Jackson2JsonMessageConverter();
-    }
+    //@Bean
+    //public Jackson2JsonMessageConverter converter() {
+    //    return new Jackson2JsonMessageConverter();
+    //}
 }

@@ -1,5 +1,8 @@
 package com.example.provider.config;
 
+import com.example.constant.ExchangeNameConst;
+import com.example.constant.QueueNameConst;
+import com.example.constant.RoutingKeyNameConst;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -17,22 +20,19 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class DirectRabbitConfig {
-    public static final String QUEUE = "direct";
-    public static final String EXCHANGE = "direct.exchange";
-    public static final String ROUTING_KEY = "direct.key";
 
     @Bean
     public Queue direct() {
-        return new Queue(QUEUE,true);
+        return new Queue(QueueNameConst.DIRECT_QUEUE_ONE, true, false, false);
     }
 
     @Bean
     public DirectExchange directExchange() {
-        return new DirectExchange(EXCHANGE, true, false);
+        return new DirectExchange(ExchangeNameConst.DIRECT_EXCHANGE_ONE, true, false);
     }
 
     @Bean
     public Binding directBindingExchange(Queue direct, DirectExchange directExchange) {
-        return BindingBuilder.bind(direct).to(directExchange).with(ROUTING_KEY);
+        return BindingBuilder.bind(direct).to(directExchange).with(RoutingKeyNameConst.DIRECT_ROUTING_KEY_ONE);
     }
 }

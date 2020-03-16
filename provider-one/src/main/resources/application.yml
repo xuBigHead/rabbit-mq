@@ -6,11 +6,11 @@ spring:
   profiles:
     active: dev
   rabbitmq:
-    host: localhost
+    host: 39.108.87.253
     port: 5672
-    username: root
-    password: root
-    virtual-host: my_host
+    username: guest
+    password: guest
+    virtual-host: /
     requested-heartbeat: 20
     connection-timeout: 0
     # 配置确认回调

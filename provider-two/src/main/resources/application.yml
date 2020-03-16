@@ -6,13 +6,13 @@ spring:
   profiles:
     active: dev
   rabbitmq:
-    host: localhost
+    host: 39.108.87.253
     port: 5672
-    username: root
-    password: root
-#    virtual-host: my_host
-#    requested-heartbeat: 20
-#    publisher-returns: true
-#    connection-timeout: 0
+    username: guest
+    password: guest
+    virtual-host: /
+    requested-heartbeat: 20
+    publisher-returns: true
+    connection-timeout: 0
 logging:
   config: classpath:logback-spring-dev.xml

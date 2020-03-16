@@ -1,6 +1,8 @@
 package com.example.provider.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.constant.ExchangeNameConst;
+import com.example.constant.RoutingKeyNameConst;
 import com.example.entity.RabbitBean;
 import com.example.provider.config.DirectRabbitConfig;
 import com.example.provider.service.RabbitMqProviderService;
@@ -28,14 +30,14 @@ public class RabbitMqProviderServiceImpl implements RabbitMqProviderService {
     @Override
     public void sendString(String message) {
         log.info("send string message: {}", message);
-        rabbitTemplate.convertAndSend(DirectRabbitConfig.EXCHANGE, DirectRabbitConfig.ROUTING_KEY, message);
+        rabbitTemplate.convertAndSend(ExchangeNameConst.DIRECT_EXCHANGE, RoutingKeyNameConst.DIRECT_ROUTING_KEY, message);
     }
 
     @Override
     public void sendObject(RabbitBean bean) {
         String messageStr = JSONObject.toJSONString(bean);
         log.info("send object message {}",messageStr);
-        rabbitTemplate.convertAndSend(DirectRabbitConfig.EXCHANGE, DirectRabbitConfig.ROUTING_KEY, messageStr);
+        rabbitTemplate.convertAndSend(ExchangeNameConst.DIRECT_EXCHANGE, RoutingKeyNameConst.DIRECT_ROUTING_KEY, messageStr);
     }
 
     @Override

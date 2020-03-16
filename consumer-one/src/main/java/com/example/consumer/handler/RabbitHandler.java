@@ -1,5 +1,8 @@
 package com.example.consumer.handler;
 
+import com.alibaba.fastjson.JSON;
+import com.example.constant.QueueNameConst;
+import com.example.entity.RabbitBean;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
@@ -15,9 +18,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class RabbitHandler {
 
-    @RabbitListener(queues = {"direct"})
+    @RabbitListener(queues = {QueueNameConst.DIRECT_QUEUE})
     public void processDirect(Message message, Channel channel) {
-        log.info("Receiver direct: {}", new String(message.getBody()));
+        String messageStr = new String(message.getBody());
+        RabbitBean rabbitBean = null;
+        try {
+            rabbitBean = JSON.parseObject(messageStr, RabbitBean.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.err.println(messageStr);
+        System.err.println(rabbitBean);
+        log.info("Receiver direct: {}", messageStr);
 
     }
 
