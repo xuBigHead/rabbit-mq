@@ -2,6 +2,7 @@ package com.example.consumer.handler.direct.sub;
 
 import com.example.constant.QueueNameConst;
 import com.example.consumer.handler.direct.DirectHandler;
+import com.example.service.IRabbitBeanService;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
@@ -15,6 +16,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class DirectOneHandler extends DirectHandler {
+    public DirectOneHandler(IRabbitBeanService rabbitBeanService) {
+        super(rabbitBeanService);
+    }
+
     @RabbitListener(queues = {QueueNameConst.DIRECT_QUEUE_ONE})
     public void processDirectOne(Message message, Channel channel) {
         this.processDirect(message, channel);

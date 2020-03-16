@@ -7,5 +7,5 @@ import com.example.entity.RabbitBean;
  * @author xmm
  * @since 2020/3/16
  */
-public interface RabbitBeanService extends IService<RabbitBean> {
+public interface IRabbitBeanService extends IService<RabbitBean> {
 }
