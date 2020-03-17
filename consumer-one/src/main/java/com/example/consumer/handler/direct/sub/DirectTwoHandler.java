@@ -1,8 +1,7 @@
 package com.example.consumer.handler.direct.sub;
 
-import com.example.constant.QueueNameConst;
+import com.example.constant.QueueNames;
 import com.example.consumer.handler.direct.DirectHandler;
-import com.example.service.IRabbitBeanService;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
@@ -15,13 +14,15 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class DirectTwoHandler extends DirectHandler {
-    public DirectTwoHandler(IRabbitBeanService rabbitBeanService) {
-        super(rabbitBeanService);
+public class DirectTwoHandler {
+    private DirectHandler directHandler;
+
+    public DirectTwoHandler(DirectHandler directHandler) {
+        this.directHandler = directHandler;
     }
 
-    @RabbitListener(queues = {QueueNameConst.DIRECT_QUEUE_TWO})
+    @RabbitListener(queues = {QueueNames.DIRECT_QUEUE_TWO})
     public void processDirectTwo(Message message, Channel channel) {
-        this.processDirect(message, channel);
+        directHandler.processDirect(message, channel);
     }
 }

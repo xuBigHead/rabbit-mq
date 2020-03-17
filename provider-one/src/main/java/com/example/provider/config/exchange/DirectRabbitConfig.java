@@ -1,8 +1,8 @@
 package com.example.provider.config.exchange;
 
-import com.example.constant.ExchangeNameConst;
-import com.example.constant.QueueNameConst;
-import com.example.constant.RoutingKeyNameConst;
+import com.example.constant.ExchangeNames;
+import com.example.constant.QueueNames;
+import com.example.constant.RoutingKeyNames;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -24,19 +24,19 @@ import javax.xml.namespace.QName;
 @Configuration
 public class DirectRabbitConfig {
 
-    @Bean(QueueNameConst.DIRECT_QUEUE_ONE)
+    @Bean(QueueNames.DIRECT_QUEUE_ONE)
     public Queue direct() {
-        return new Queue(QueueNameConst.DIRECT_QUEUE_ONE, true, false, false);
+        return new Queue(QueueNames.DIRECT_QUEUE_ONE, true, false, false);
     }
 
-    @Bean(ExchangeNameConst.DIRECT_EXCHANGE_ONE)
+    @Bean(ExchangeNames.DIRECT_EXCHANGE_ONE)
     public DirectExchange directExchange() {
-        return new DirectExchange(ExchangeNameConst.DIRECT_EXCHANGE_ONE, true, false);
+        return new DirectExchange(ExchangeNames.DIRECT_EXCHANGE_ONE, true, false);
     }
 
     @Bean
-    public Binding directBindingExchange(@Qualifier(QueueNameConst.DIRECT_QUEUE_ONE) Queue direct,
-                                         @Qualifier(ExchangeNameConst.DIRECT_EXCHANGE_ONE) DirectExchange directExchange) {
-        return BindingBuilder.bind(direct).to(directExchange).with(RoutingKeyNameConst.DIRECT_ROUTING_KEY_ONE);
+    public Binding directBindingExchange(@Qualifier(QueueNames.DIRECT_QUEUE_ONE) Queue direct,
+                                         @Qualifier(ExchangeNames.DIRECT_EXCHANGE_ONE) DirectExchange directExchange) {
+        return BindingBuilder.bind(direct).to(directExchange).with(RoutingKeyNames.DIRECT_ROUTING_KEY_ONE);
     }
 }

@@ -1,13 +1,9 @@
 package com.example.provider.config;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
-import com.example.constant.ExchangeNameConst;
-import com.example.constant.RoutingKeyNameConst;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
-import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

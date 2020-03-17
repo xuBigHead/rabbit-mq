@@ -1,18 +1,15 @@
 package com.example.provider.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
-import com.example.constant.ExchangeNameConst;
-import com.example.constant.RoutingKeyNameConst;
+import com.example.constant.ExchangeNames;
+import com.example.constant.RoutingKeyNames;
 import com.example.entity.RabbitBean;
 import com.example.provider.service.RabbitMqProviderService;
-import com.fasterxml.jackson.databind.ser.impl.ObjectIdWriter;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
-import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.amqp.support.converter.SimpleMessageConverter;
 import org.springframework.stereotype.Service;
@@ -32,7 +29,7 @@ public class RabbitMqProviderServiceImpl implements RabbitMqProviderService {
     @Override
     public void sendString(String message) {
         log.info("send string message: {}", message);
-        rabbitTemplate.convertAndSend(ExchangeNameConst.DIRECT_EXCHANGE_ONE, RoutingKeyNameConst.DIRECT_ROUTING_KEY_ONE, message);
+        rabbitTemplate.convertAndSend(ExchangeNames.DIRECT_EXCHANGE_ONE, RoutingKeyNames.DIRECT_ROUTING_KEY_ONE, message);
     }
 
     @Override
@@ -40,7 +37,7 @@ public class RabbitMqProviderServiceImpl implements RabbitMqProviderService {
         String messageStr = JSONObject.toJSONString(bean);
         log.info("send object message {}",messageStr);
 
-        rabbitTemplate.convertAndSend(ExchangeNameConst.DIRECT_EXCHANGE_ONE, RoutingKeyNameConst.DIRECT_ROUTING_KEY_ONE, messageStr);
+        rabbitTemplate.convertAndSend(ExchangeNames.DIRECT_EXCHANGE_ONE, RoutingKeyNames.DIRECT_ROUTING_KEY_ONE, messageStr);
     }
 
     @Override

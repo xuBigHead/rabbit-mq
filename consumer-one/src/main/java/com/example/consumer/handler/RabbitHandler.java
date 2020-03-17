@@ -1,9 +1,5 @@
 package com.example.consumer.handler;
 
-import com.alibaba.fastjson.JSON;
-import com.example.constant.QueueNameConst;
-import com.example.entity.RabbitBean;
-import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
