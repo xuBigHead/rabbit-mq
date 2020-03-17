@@ -23,7 +23,7 @@ public class DirectHandler {
     protected void processDirect(Message message, Channel channel){
         String messageStr = new String(message.getBody());
 
-        // TODO 可以通过redis避免消息重复消费
+        // 通过读取数据库中数据来保证消息不被重复消费
 
         RabbitBean rabbitBean;
         try {
