@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
  * @since 2020/2/24
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.example.config"})
 public class ProviderOneApplication {
 
     public static void main(String[] args) {

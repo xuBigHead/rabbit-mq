@@ -1,8 +1,12 @@
 package com.example.provider.controller;
 
+import com.example.constant.ExchangeNames;
+import com.example.constant.RoutingKeyNames;
 import com.example.entity.RabbitBean;
 import com.example.provider.service.RabbitMqProviderService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -12,11 +16,13 @@ import java.util.Map;
  * @author xmm
  * @since 2020/2/24
  */
+@Slf4j
 @RestController
-@RequestMapping("/provider-three")
+@RequestMapping("/provider-two")
 @AllArgsConstructor
-public class RabbitMqProviderController {
+public class ProviderController {
     RabbitMqProviderService rabbitMqProviderService;
+    RabbitTemplate rabbitTemplate;
 
     @GetMapping("/direct/string")
     public void sendString(String message) {
@@ -30,7 +36,8 @@ public class RabbitMqProviderController {
 
     @GetMapping("/fanout/string")
     public void send(String message) {
-        rabbitMqProviderService.send(message);
+        log.info("fanout sender : {}", message);
+        rabbitTemplate.convertAndSend(ExchangeNames.FANOUT_EXCHANGE_TWO, RoutingKeyNames.FANOUT_ROUTING_KEY_TWO, message);
     }
 
     @GetMapping("/topic/string")

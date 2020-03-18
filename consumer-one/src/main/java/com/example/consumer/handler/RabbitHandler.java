@@ -13,11 +13,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class RabbitHandler {
-    @RabbitListener(queues = {"fanout.a", "fanout.b", "fanout.c"})
-    public void processFanout(Message message) {
-        log.info("Receiver fanout: {}", new String(message.getBody()));
-    }
-
     @RabbitListener(queues = {"topic.message"})
     public void processTopic(Message message) {
         log.info("Receiver topic: {}", new String(message.getBody()));
