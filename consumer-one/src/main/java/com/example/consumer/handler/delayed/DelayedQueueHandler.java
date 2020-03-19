@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -21,17 +22,17 @@ import java.util.Random;
 @Slf4j
 @Component
 @AllArgsConstructor
-@RabbitListener(queues = QueueNames.DELAYED_QUEUE)
 public class DelayedQueueHandler {
     IRabbitBeanService rabbitBeanService;
 
     @RabbitHandler
+    @RabbitListener(queues = QueueNames.DELAYED_QUEUE)
     public void receiveDelayMessage(Message message, Channel channel){
         String milliseconds = new String(message.getBody());
         Random random = new Random();
         int i = random.nextInt(10);
         try {
-            log.info("DelayQueueConsumer Time : {}， and the millis : {}", ZonedDateTime.now(), milliseconds);
+            log.info("DelayQueueConsumer Time : {}， and the millis : {}", new Date(), milliseconds);
             if((i&1)==1) {
                 channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
             } else {

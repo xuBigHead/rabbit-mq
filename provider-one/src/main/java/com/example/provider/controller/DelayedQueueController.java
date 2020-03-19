@@ -22,15 +22,15 @@ import java.time.ZonedDateTime;
 public class DelayedQueueController {
     RabbitTemplate rabbitTemplate;
 
-    @GetMapping("delayed")
-    public void delayed(int number) {
-        log.warn("延迟队列发送 : {} milliseconds", number);
+    @GetMapping("/delayed")
+    public void delayed(int milliseconds,String exchange,String routingKey) {
+        exchange = exchange == null?ExchangeNames.DELAYED_EXCHANGE:exchange;
+        routingKey = routingKey == null?RoutingKeyNames.DELAYED_ROUTING_KEY:routingKey;
+        log.warn("延迟队列发送 : {} milliseconds", milliseconds);
         // 这里的Exchange可以是业务的Exchange，为了方便测试这里直接往死信Exchange里投递消息
-        rabbitTemplate.convertAndSend(ExchangeNames.DELAYED_EXCHANGE,
-                RoutingKeyNames.DELAYED_ROUTING_KEY,
-                number,
+        rabbitTemplate.convertAndSend(exchange, routingKey, milliseconds+"",
                 (message) -> {
-                    message.getMessageProperties().setDelay(number);
+                    message.getMessageProperties().setDelay(milliseconds);
                     log.info("Now : {}", ZonedDateTime.now());
                     return message;
                 });

@@ -35,9 +35,11 @@ public class ProviderController {
     }
 
     @GetMapping("/fanout/string")
-    public void send(String message) {
+    public void send(String message, String exchange, String routingKey) {
+        exchange = exchange == null ? ExchangeNames.FANOUT_EXCHANGE_ONE : exchange;
+        routingKey = routingKey == null ? RoutingKeyNames.FANOUT_ROUTING_KEY_ONE : routingKey;
         log.info("fanout sender : {}", message);
-        rabbitTemplate.convertAndSend(ExchangeNames.FANOUT_EXCHANGE_ONE, RoutingKeyNames.FANOUT_ROUTING_KEY_ONE, message);
+        rabbitTemplate.convertAndSend(exchange, routingKey, message);
     }
 
     @GetMapping("/topic/string")
@@ -53,14 +55,14 @@ public class ProviderController {
     @GetMapping("/header/string")
     public void sendHeader(String message) {
         Map<String, Object> map = new HashMap<>(1);
-        map.put("bean",new RabbitBean());
-        rabbitMqProviderService.sendHeader(map,message);
+        map.put("bean", new RabbitBean());
+        rabbitMqProviderService.sendHeader(map, message);
     }
 
     @GetMapping("/header2/string")
     public void sendHeader2(String message) {
         Map<String, Object> map = new HashMap<>(1);
-        map.put("bean",new RabbitBean());
-        rabbitMqProviderService.sendHeader2(map,message);
+        map.put("bean", new RabbitBean());
+        rabbitMqProviderService.sendHeader2(map, message);
     }
 }
